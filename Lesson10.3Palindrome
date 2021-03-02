@@ -1,0 +1,19 @@
+package com.dmdev.lesson10.homework.task1;
+
+/**
+ * Проверить, является ли введённая строка палиндромом, т.е. читается одинаково в обоих направлениях.
+ */
+public class Strings {
+
+    public static void main(String[] args) {
+        String text = "А роза упала на лапу Азора";
+        System.out.println(palindrome(text));
+    }
+
+    private static boolean palindrome(String text) {
+        String replace = text.replaceAll(" ", "");
+        StringBuilder palindrome = new StringBuilder(replace);
+        palindrome.reverse();
+        return replace.equalsIgnoreCase(String.valueOf(palindrome));
+    }
+}
