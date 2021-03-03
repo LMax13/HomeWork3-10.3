@@ -1,0 +1,63 @@
+package com.dmdev.lesson10.homework.task2;
+
+/**
+ * Написать программу, преобразующую строку, содержащую число в римском формате, в число в арабском формате.
+ * Границы чисел: от 1 до 3999. Предусмотреть случай, когда меньший символ идёт перед большим:
+ * Например CM == 900.
+ * Соответствие:
+ * M 1000
+ * D 500
+ * C 100
+ * L 50
+ * X 10
+ */
+public class RomanFormat {
+
+    public static void main(String[] args) {
+
+        String value = "lx";
+        int result = romanToArabic(value);
+        printState(result);
+    }
+
+    private static int romanToArabic(String arabic) {
+        arabic = arabic.toUpperCase();
+        int toArabic = convertToNumber(arabic.charAt(arabic.length() - 1));
+        int result = toArabic;
+        for (int i = arabic.length() - 2; i >= 0; i--) {
+            int currentArabic = convertToNumber(arabic.charAt(i));
+            result += currentArabic < toArabic ? -currentArabic : currentArabic;
+            toArabic = currentArabic;
+        }
+        return result;
+    }
+
+    private static int convertToNumber(char letter) {
+        switch (letter) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+
+    private static void printState(int result) {
+        if (result < 1 || result > 3999) {
+            System.out.println("Это число не может быть преобразовано.");
+        } else {
+            System.out.println(result);
+        }
+    }
+}
